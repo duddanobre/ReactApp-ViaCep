@@ -29,7 +29,7 @@ export default function BuscarCep(){
           },
         (error) => {
           if(cep !== (/^[0-9]{8}$/)){
-            alert('digite apenas 8 digitos no cep');
+            alert('digite 8 digitos no cep');
           }else{
             alert('cep não encontrado')
           }
