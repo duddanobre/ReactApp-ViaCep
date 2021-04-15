@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Lista from '../lista';
@@ -9,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
 export default function BuscarCep(){
+
     const classes = useStyles();
     const [cep, setCep] = useState('');
     const [enderecos, setEnderecos] = useState({
@@ -19,12 +21,12 @@ export default function BuscarCep(){
     }); 
 
       function handleBusca(e){
-       e.preventDefault();
+        e.preventDefault();
        
          axios.get('https://viacep.com.br/ws/' + cep + '/json')
         .then(response => {
           setEnderecos(response.data)
-        },
+          },
         (error) => {
           if(cep !== (/^[0-9]{8}$/)){
             alert('digite apenas 8 digitos no cep');
@@ -39,12 +41,15 @@ export default function BuscarCep(){
     
         return(
 
-            <Container maxWidth="sm">
+            <Container maxWidth="sm" style={{ backgroundColor: '#ffcdd2', height: '100vh' }}>
                 <CssBaseline />
+                <Typography variant="h4" gutterBottom color="secondary">
+                    Busca Cep
+                </Typography>
                 <div className={classes.paper}>   
                     <form className={classes.form} onSubmit={handleBusca}>
-                        <TextField id="filled-basic" label="cep" 
-                        variant="filled"
+                        <TextField id="outlined-basic" label="cep" 
+                        variant="outlined"
                         value={cep} 
                         onChange={ e => setCep(e.target.value)}
                         required
@@ -54,23 +59,23 @@ export default function BuscarCep(){
 
                         <Button type="submit" fullWidth
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         className={classes.submit}
                         >
                             Buscar Endereço
                         </Button>
                     </form>
-               </div>    
-            <Lista>
-            <ul>
-                
-                <li data={enderecos} style={{listStyle: 'none'}}>
-                <p>{enderecos['cep']}</p>
-                <p>{enderecos['bairro']}</p>
-                <p>{enderecos['logradouro']}</p>
-                </li>
+               </div>   
 
-              </ul>
+            <Lista>
+            <ul style={{listStyle: 'none'}}>
+                
+                <li>{enderecos['cep']}</li>
+                <li>{enderecos['bairro']}</li>
+                <li>{enderecos['logradouro']}</li>
+                <li>{enderecos['uf']}</li>
+
+            </ul>
             
             </Lista>
             </Container>

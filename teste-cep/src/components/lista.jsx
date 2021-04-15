@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import SearchIcon from '@material-ui/icons/Search';
+import HouseIcon from '@material-ui/icons/House';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,11 +22,14 @@ export default class Lista extends Component {
       <List component="nav" aria-label="itens"
       subheader={
         <ListSubheader component="div" id="endereços" style={{fontSize: 16}}>
-          <SearchIcon></SearchIcon>  Endereços
+          <ListItemIcon>
+            <HouseIcon color="secondary" />
+          </ListItemIcon>
+           Endereços
         </ListSubheader>
       }
       className={useStyles.root}>
-        <ListItem >
+        <ListItem button>
         <ListItemText >
             {this.props.children}
         </ListItemText>
